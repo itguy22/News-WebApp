@@ -3,11 +3,13 @@ from dotenv import load_dotenv
 import requests
 import sqlite3
 import os
+import pandas as pd
 
 load_dotenv()
 
 app = Flask(__name__)
 
+df = pd.read_csv('/data/LGBT_Survey_DailyLife.csv')
 def create_table():
     try:
         conn = sqlite3.connect('database.db')
@@ -26,6 +28,12 @@ def create_table():
         print(f"Error {e} occurred while creating table")
     finally:
         conn.close()
+
+@app.route('/data')
+def data():
+    df = pd.read_csv('/data/LGBT_Survey_DailyLife.csv')
+    return df.to_json(orient='records')
+
 
 @app.route('/')
 def home():

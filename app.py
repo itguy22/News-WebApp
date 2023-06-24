@@ -9,7 +9,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-df = pd.read_csv('/data/LGBT_Survey_DailyLife.csv')
+df = pd.read_csv('./data/LGBT_Survey_DailyLife.csv')
 def create_table():
     try:
         conn = sqlite3.connect('database.db')

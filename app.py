@@ -4,6 +4,7 @@ import requests
 import sqlite3
 import os
 import pandas as pd
+from datetime import datetime
 
 load_dotenv()
 
@@ -29,6 +30,26 @@ def create_table():
     finally:
         conn.close()
 
+@app.route('/news')
+def news():
+    create_table()
+
+    # Connect to SQLite database and fetch data
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM news_data ORDER BY publishedAt DESC LIMIT 10")  # Add ORDER BY and LIMIT to your SQL query
+    data = cursor.fetchall()
+    conn.close()
+
+    articles = [{'id': id, 'title': title, 'description': description, 'url': url, 'publishedAt': publishedAt} for id, title, description, url, publishedAt in data]
+
+    # Parse the publishedAt string into a datetime object
+    for article in articles:
+        article['publishedAt'] = datetime.strptime(article['publishedAt'], "%Y-%m-%dT%H:%M:%SZ")
+
+    return render_template('news.html', articles=articles)  # Pass data to your news.html template
+
+
 @app.route('/chart')
 def chart():
     return render_template('chart.html')
@@ -39,24 +60,18 @@ def data():
     return df.to_json(orient='records')
 
 
-@app.route('/')
+@app.route("/")
 def home():
-    # ensure table exists before trying to fetch data
-    create_table()
+    return render_template('landingPage.html', title='Landing Page')
 
-    # Connect to SQLite database and fetch data
-    try:
-        conn = sqlite3.connect('database.db')
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM news_data")
-        data = cursor.fetchall()
-    except sqlite3.Error as e:
-        print(f"Error {e} occurred while fetching data")
-        data = []
-    finally:
-        conn.close()
+@app.route('/resources')
+def resources():
+    return render_template('resources.html')
 
-    return render_template('home.html', data=data)
+@app.route('/joinus')
+def joinus():
+    return render_template('joinus.html')
+
 
 @app.route('/update-data')
 def update_data():
@@ -81,8 +96,12 @@ def update_data():
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
         for article in articles:
-            cursor.execute("INSERT INTO news_data (title, description, url, publishedAt) VALUES (?, ?, ?, ?)",
-                (article['title'], article['description'], article['url'], article['publishedAt']))
+            cursor.execute("""
+                INSERT INTO news_data (title, description, url, publishedAt) 
+                SELECT ?, ?, ?, ? 
+                WHERE NOT EXISTS(SELECT 1 FROM news_data WHERE title=?)
+                """,
+                (article['title'], article['description'], article['url'], article['publishedAt'], article['title']))
         conn.commit()
     except sqlite3.Error as e:
         print(f"Error {e} occurred while inserting data")
@@ -92,8 +111,8 @@ def update_data():
 
     return jsonify({"success": True})
 
+
 if __name__ == '__main__':
     # Call update data function to get data when the ap starts
     with app.app_context():
-        update_data()
-    app.run(debug=True)
+        app.run(debug=True)

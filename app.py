@@ -76,4 +76,7 @@ def update_data():
     return jsonify({"success": True})
 
 if __name__ == '__main__':
+    # Call update data function to get data when the ap starts
+    with app.app_context():
+        update_data()
     app.run(debug=True)

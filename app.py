@@ -29,6 +29,10 @@ def create_table():
     finally:
         conn.close()
 
+@app.route('/chart')
+def chart():
+    return render_template('chart.html')
+
 @app.route('/data')
 def data():
     df = pd.read_csv('/data/LGBT_Survey_DailyLife.csv')

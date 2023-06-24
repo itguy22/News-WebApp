@@ -1,6 +1,10 @@
 from flask import Flask, render_template, jsonify
+from dotenv import load_dotenv
 import requests
 import sqlite3
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -44,11 +48,12 @@ def home():
 
 @app.route('/update-data')
 def update_data():
+    news_api_key = os.getenv('NEWS_API_KEY')
     url = 'https://newsapi.org/v2/everything'
     parameters = {
         'q': 'transgender discrimination OR nonbinary discrimination',
         'pageSize': 100,
-        'apiKey': '78d50591ba5b42c6a22c77fe2aa4d1bc',
+        'apiKey': news_api_key,
     }
 
     try:

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.72.0">
+  <title>Carousel Template · Bootstrap</title>
+
+  <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/carousel/">
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+    integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    body {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      color:darkcyan;
+      background-color:rgba(0, 139, 139, 0.22);
+    }
+
+    .content .col-lg-4 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .content h2 {
+      font-weight: 400;
+    }
+
+    .content .col-lg-4 p {
+      margin-right: .75rem;
+      margin-left: .75rem;
+    }
+
+    .featurette-divider {
+      margin: 5rem 0;
+      background-color:darkcyan;
+    }
+
+    .featurette-heading {
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -.05rem;
+    }
+
+    @media (min-width: 40em) {
+      .featurette-heading {
+        font-size: 50px;
+      }
+    }
+
+    @media (min-width: 62em) {
+      .featurette-heading {
+        margin-top: 7rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-info">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">ARA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto mb-2 mb-md-0">
+            <li class="nav-item active">
+              <a class="nav-link" aria-current="page" href="landingPage.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="landingPage.html#ourmission">Our Mission</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Resources</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="news.html" aria-current="page">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="joinus.html" aria-current="page">Join Us</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="container content">
+       <hr size="10" id="resources" class="featurette-divider">
+       <div class="row">
+        <div class="col-lg-4">
+          <img src="pics/The_Trevor_Project_logo.png" class="rounded-circle d-md-block w-100" alt="...">
+          <h2 class="text-dark">Trevor Project</h2>
+          <p>The Trevor Project is an American nonprofit organization founded in 1998. Focused on suicide prevention efforts among lesbian, gay, bisexual, transgender, queer, and questioning youth, they offer a toll-free telephone number where confidential assistance is provided by trained counselors.</p>
+          <p><a class="btn btn-warning" href="https://www.thetrevorproject.org/" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img src="pics/unnamed.jpg" class="rounded-circle d-md-block w-100" alt="...">
+          <h2 class="text-dark">Human Rights Campaign</h2>
+          <p>The Human Rights Campaign (HRC) is an American LGBTQ advocacy group. The organization focuses on protecting and expanding rights for LGBTQ individuals, most notably advocating for same-sex marriage, anti-discrimination and hate crimes legislation, and HIV/AIDS advocacy.</p>
+          <p><a class="btn btn-warning" href="https://www.hrc.org/" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+
+        <div class="col-lg-4">
+          <img src="pics/our-wave-logo-pride.png" class="rounded-circle d-md-block w-100" alt="...">
+          <h2 class="text-dark">Our Wave</h2>
+          <p>Our Wave is an online platform for survivors to share stories, receive customized support, and join a community of understanding. Our Wave will provide survivors with the community and tools needed to share their voice and make an impact with their story.</p>
+          <p><a class="btn btn-warning" href="https://www.ourwave.org/what-we-do" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+      <hr size="10" class="featurette-divider">
+    </div><!-- /.container -->
+
+    <!-- FOOTER -->
+    <footer class="container">
+        <p class="float-right"><a href="landingPage.html">Back to home</a></p>
+        <p>&copy; 2023 ARA &middot; <a href="aboutus.html">About Us</a> &middot;</p>
+    </footer>
+  </main>
+
+</body>
+
+</html>

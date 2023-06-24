@@ -7,51 +7,42 @@ To run this app, you need to have Python installed on your machine. We recommend
 Installation
 First, clone this repository to your local machine using git:
 
-bash
-Copy code
+
 git clone https://github.com/yourusername/yourrepository.git
 Replace yourusername and yourrepository with your actual GitHub username and repository name.
 
 Next, navigate to the project directory:
 
-bash
-Copy code
+
 cd yourrepository
 It's recommended to create a virtual environment to isolate the dependencies of this project from your other Python projects. You can create a virtual environment using the following commands:
 
-bash
-Copy code
+
 python3 -m venv env
 Activate the virtual environment:
 
 On Unix/macOS:
 
-bash
-Copy code
 source env/bin/activate
 On Windows:
 
-bash
-Copy code
+
 .\env\Scripts\activate
 After activating the virtual environment, install the required Python packages:
 
-bash
-Copy code
+
 pip install -r requirements.txt
 Running the app
 You can start the app with the following command:
 
-bash
-Copy code
+
 flask run
 The app will be accessible at http://localhost:5000
 
 API Key
 The News API requires an API key, which you need to provide. You can do this by setting the NEWSAPI_KEY environment variable before running the app:
 
-bash
-Copy code
+
 export NEWSAPI_KEY=your_api_key
 flask run
 Replace your_api_key with your actual News API key. On Windows, use set instead of export.

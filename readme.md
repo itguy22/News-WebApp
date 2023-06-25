@@ -1,6 +1,9 @@
 News Analysis and Visualization App
 This app collects and displays news data about gender discrimination and gender violence, focusing on news regarding transgender and nonbinary individuals. It uses the News API to gather news articles, which are then stored in a SQLite database. The app provides a simple web interface for viewing the articles.
 
+
+![webappshowcase](https://github.com/itguy22/News-WebApp/assets/125841661/b4f8d413-66c9-4921-8741-1e33783ab168)
+
 Prerequisites
 To run this app, you need to have Python installed on your machine. We recommend using Python 3.9 or later. You can download Python from the official website: https://www.python.org/downloads/
 

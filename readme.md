@@ -1,5 +1,6 @@
 News Analysis and Visualization App
-This app collects and displays news data about gender discrimination and gender violence, focusing on news regarding transgender and nonbinary individuals. It uses the News API to gather news articles, which are then stored in a SQLite database. The app provides a simple web interface for viewing the articles.
+
+This app collects and displays news data about gender discrimination and gender violence, focusing on news regarding transgender and nonbinary individuals. It uses the News API to gather news articles, which are then stored in a SQLite database. The app provides a simple web interface for viewing the articles. The app runs with the Flask web framework. The web app includes statistics provided from a Kaggle dataset taken from a 2012 EU survey.
 
 
 ![webappshowcase](https://github.com/itguy22/News-WebApp/assets/125841661/b4f8d413-66c9-4921-8741-1e33783ab168)

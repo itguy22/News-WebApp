@@ -56,7 +56,7 @@ def chart():
 
 @app.route('/data')
 def data():
-    df = pd.read_csv('/data/LGBT_Survey_DailyLife.csv')
+    df = pd.read_csv('./data/LGBT_Survey_DailyLife.csv')
     return df.to_json(orient='records')
 
 
@@ -73,8 +73,7 @@ def joinus():
     return render_template('joinus.html')
 
 
-@app.route('/update-data')
-def update_data():
+def update_data_db():
     news_api_key = os.getenv('NEWS_API_KEY')
     url = 'https://newsapi.org/v2/everything'
     parameters = {
@@ -83,36 +82,52 @@ def update_data():
         'apiKey': news_api_key,
     }
 
+    # Fetching new data from API
     try:
         response = requests.get(url, params=parameters)
         response.raise_for_status()  # Raises a HTTPError if the status is 4xx, 5xx
         articles = response.json()['articles']
+        print(f'Fetched {len(articles)} articles from the API')
     except (requests.RequestException, ValueError, KeyError) as e:
         print(f"Error {e} occurred while fetching API data")
-        return jsonify({"success": False, "message": str(e)})
+        return False
 
     # Connect to SQLite database and store data
     try:
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
+        
+        # Inserting new data
         for article in articles:
-            cursor.execute("""
-                INSERT INTO news_data (title, description, url, publishedAt) 
-                SELECT ?, ?, ?, ? 
-                WHERE NOT EXISTS(SELECT 1 FROM news_data WHERE title=?)
-                """,
-                (article['title'], article['description'], article['url'], article['publishedAt'], article['title']))
+            cursor.execute("SELECT * FROM news_data WHERE url = ?", (article['url'],))
+            existing_article = cursor.fetchone()
+            if existing_article is None:
+                print(f'Inserting new article: {article["title"]}')
+                cursor.execute("INSERT INTO news_data (title, description, url, publishedAt) VALUES (?, ?, ?, ?)",
+                            (article['title'], article['description'], article['url'], article['publishedAt']))
+            else:
+                print(f'Skipping duplicate article: {article["title"]}')
+
         conn.commit()
+
     except sqlite3.Error as e:
         print(f"Error {e} occurred while inserting data")
-        return jsonify({"success": False, "message": str(e)})
+        return False
     finally:
         conn.close()
 
-    return jsonify({"success": True})
+    return True
 
+@app.route('/update-data')
+def update_data_request():
+    success = update_data_db()
+    if success:
+        return jsonify({"success": True})
+    else:
+        return jsonify({"success": False, "message": "An error occurred while updating the data"})
 
 if __name__ == '__main__':
     # Call update data function to get data when the ap starts
     with app.app_context():
+        update_data_db()
         app.run(debug=True)

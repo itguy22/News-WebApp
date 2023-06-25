@@ -72,6 +72,10 @@ def resources():
 def joinus():
     return render_template('joinus.html')
 
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutus.html')
+
 
 def update_data_db():
     news_api_key = os.getenv('NEWS_API_KEY')

@@ -6,35 +6,61 @@
     <title>Document</title>
   </head>
   <body>
-    <div style="width: 80%; margin: auto">
-      <canvas id="myChart"></canvas>
-    </div>
+    <div style="width: 50%; margin: auto" id="main-container"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-      const ctx = document.getElementById("myChart");
-
-      new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-          datasets: [
-            {
-              label: "# of Votes",
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
+      fetch("http://127.0.0.1:5000/data")
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          if (data) {
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+              const create = document.createElement("canvas");
+              create.id = "myChart" + i;
+              document.getElementById("main-container").appendChild(create);
+              const ctx = document.getElementById("myChart" + i);
+              const num = data[i];
+              new Chart(ctx, {
+                type: "bar",
+                data: {
+                  labels: [
+                    "Bisexual men",
+                    "Bisexual women",
+                    "Gay men",
+                    "Lesbian women",
+                    "N",
+                    "Transgender",
+                  ],
+                  datasets: [
+                    {
+                      label: num["CountryID"],
+                      data: [
+                        num["Bisexual men"],
+                        num["Bisexual women"],
+                        num["Gay men"],
+                        num["Lesbian women"],
+                        num["N"],
+                        num["Transgender"],
+                      ],
+                      borderWidth: 5,
+                    },
+                  ],
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                    },
+                  },
+                },
+              });
+            }
+          }
+        });
     </script>
   </body>
 </html>

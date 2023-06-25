@@ -22,6 +22,19 @@
     crossorigin="anonymous"></script>
 
   <style>
+
+    .read-more-button {
+      color: #fff; /* white text */
+      background-color: #17a2b8; /* color for bg-info */
+      border-color: #17a2b8; /* border color for bg-info */
+    }
+
+    .read-more-button:hover {
+      color: #fff; /* white text */
+      background-color: #138496; /* darker blue for hover effect */
+      border-color: #118185; /* darker border color for hover effect */
+    }
+
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -108,7 +121,7 @@
     
 
   <main>
-    
+    <!--Todo: Move the Read More hyperlink and published at details to the bottom right hand of the page.-->
     <div class="container content">
        <hr size="10" id="resources" class="featurette-divider">
         
@@ -119,12 +132,14 @@
            <p class="lead">{{ article.description }}</p>
          </div>
          <div class="col-md-5">
-           <p><a href="{{ article.url }}" target="_blank">Read More</a></p>
+          <button class="btn btn-outline-dark btn-warning read-more-button">
+            <a href="{{ article.url }}" style="color: inherit; text-decoration: none;">Read More</a>
+          </button>
            <p><small>Published at: {{ article.publishedAt.strftime("%Y-%m-%d %H:%M:%S") }}</small></p>
          </div>
        </div>
        <hr class="featurette-divider">
-       {% endfor %}       
+       {% endfor %}
 
        <hr size="10" class="featurette-divider">
      </div><!-- /.container -->
